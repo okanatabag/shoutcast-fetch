@@ -1,9 +1,27 @@
-<?php error_reporting(E_ALL ^ E_NOTICE ^ E_DEPRECATED); 
-header("Content-Type: text/html; charset=iso-8859-9");
-header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-header("Cache-Control: no-store, no-cache, must-revalidate");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
+<?php
+/**
+ * shoutCastInfo
+ *
+ * An open source application development framework for PHP 5.1.6 or newer
+ *
+ * @package		shoutCastInfo
+ * @author		Okan Atabag & Turkay DALAN
+ * @copyright		Okiturk
+ * @license		This library is free software;
+ * @link		https://github.com/Okiturk/shoutCastInfo
+ * @since		Version 1.1
+ * @filesource
+ */
+
+// ------------------------------------------------------------------------
+
+/**
+ * shoutCastInfo Class
+ *
+ * This class can get shoutcast server info.
+ *
+ * @package		shoutCastInfo
+ */
 class shoutCastInfo {
 // Radio Station Name
 var $station_name = '';
@@ -25,7 +43,15 @@ var $stream_genre = "";
 var $bitrate = "";
 var $peaklisteners = "";
 
-public function shoutCastInfo($caster_ip,$caster_port){
+/**
+	 * Constructor
+	 *
+	 * @param caster_ip	string
+	 * @param caster_port	int
+	 * @return	void
+*/
+
+public function __construct($caster_ip,$caster_port){
 	if(empty($this->caster_internal_ip)){
 		$this->shout_caster_ip = $caster_ip;
 		$this->shout_caster_port = $caster_port;
@@ -35,7 +61,15 @@ public function shoutCastInfo($caster_ip,$caster_port){
 		$this->shout_caster_port = $this->caster_internal_port;
 	}
 }
-public function init(){ 
+
+/**
+	 * Initialize shoutCastInfo
+	 *
+	 *
+	 * @access	private
+	 * @return	bool
+*/
+private function init(){ 
 	try {
 		$fp = fsockopen ($this->shout_caster_ip, $this->shout_caster_port, $this->errno, $this->errstr, $this->connect_timeout);
 		if (!$fp){
@@ -95,6 +129,13 @@ public function init(){
 		return array('error-message'=>$e->getMessage());
 	}
 }
+
+/**
+	 * get Bitrate method
+	 *
+	 * @access	public
+	 * @return	mixed
+*/
 public function get_bitrate(){
 	$in=$this->init();
 	if($in===true){
@@ -104,6 +145,13 @@ public function get_bitrate(){
 		return $in['error-message'];
 	}
 }
+
+/**
+	 * get currentsong method
+	 *
+	 * @access	public
+	 * @return	mixed
+*/
 public function get_currentsong(){
 	$in=$this->init();
 	if($in===true){
@@ -113,6 +161,12 @@ public function get_currentsong(){
 		return $in['error-message'];
 	}
 }
+/**
+	 * get currentlisteners method
+	 *
+	 * @access	public
+	 * @return	mixed
+*/
 public function get_currentlisteners(){
 	$in=$this->init();
 	if($in===true){
