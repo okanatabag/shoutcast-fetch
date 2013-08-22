@@ -5,17 +5,12 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 class shoutCastInfo {
-//General parameters;
 // Radio Station Name
 var $station_name = '';
 // IP address (e.g. localhost)
 var $caster_ip = ""; // insert ip or domain        
 // Port for the caster (e.g. 8000) Leave blank if u don't know what your doing.
 var $caster_port = ""; // insert broadcast port 
-// Advanced config parameters
-// If both web server and icecast are behind a router and the web server needs
-// to know the internal ip of caster so it can pull the info for the player.
-// This could be the case if all three got different internal ip-s.
 var $caster_internal_ip = "";
 var $caster_internal_port = "";
 var $errno = "0";
